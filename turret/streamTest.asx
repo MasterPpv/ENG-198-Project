@@ -1,0 +1,6 @@
+<ASX version ="3.0">
+  <TITLE>Stream1234</TITLE>
+  <ENTRY>
+    <REF HREF="http://172.0.0.1:8084" />
+  </ENTRY>
+</ASX>

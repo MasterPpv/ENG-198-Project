@@ -1,0 +1,2 @@
+cvlc v4l2:///dev/$1 --sout='#transcode{vcodec=VP80,vb=2000,scale=0,acodec=vorb,ab=128,channels=2,samplerate=44100}:http{mux=webm,dst=:8084/}' :no-sout-rtp-sap :no-sout-standard-sap :ttl=1 :sout-keep
+

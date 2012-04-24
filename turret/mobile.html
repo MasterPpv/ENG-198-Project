@@ -1,0 +1,60 @@
+<html>
+<head>
+<script type="text/javascript">
+  function up()
+    {
+	var string = "/gun/up"   
+	httpGet(string)
+    }
+function down()
+    {
+	var string = "/gun/down"   
+	httpGet(string)
+    }
+function left()
+    {
+	var string = "/gun/left"   
+	httpGet(string)
+    }
+function right()
+    {
+	var string = "/gun/right"   
+	httpGet(string)
+    }
+function stop()
+    {
+	var string = "/gun/stop"   
+	httpGet(string)
+    }
+
+function fire()
+    {
+	var string = "/gun/fire"   
+	httpGet(string)
+    }
+ 
+  function httpGet(theUrl)
+    {
+    
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+    }
+</script>
+</head>
+<body>
+<h1> hi </h1>
+<iframe name="video1" src="http://172.0.0.1:8090/?action=stream" width="640" height="480" frameborder="0" ></iframe>
+<form>
+<input type="button" value="up" onclick="up()" /> <br>
+<input type="button" value="left" onclick="left()" />
+<input type="button" value="right" onclick="right()" /> <br>
+<input type="button" value="down" onclick="down()" /><br>
+<input type="button" value="stop" onclick="stop()" />
+<input type="button" value="fire" onclick="fire()" />
+</form>
+</body>
+</html>

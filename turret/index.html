@@ -1,0 +1,37 @@
+<html>
+	<body>
+		<table width="960" height="480" border="0">
+			<tr style="background-color:#EEEEEE;text-align:center">
+				<th height="320" width="320" style="font-style:normal;font-weight:normal">
+					<u>Basic Controls</u><br/><br/>
+					You can aim and fire the turret by clicking the buttons below.
+					Use the live video feed on the right from the turret's webcam
+					to see what you're aiming at. There is a small laser attached
+					to the bottom of the turret to help you aim, as well. Keep in
+					mind that it takes a little bit of time for the turret to get
+					ready to fire again, and make sure to keep an eye on how much
+					ammo you have left. You can also control the turret by using
+					the following controls while in the applet:<br/><br/>
+					<u>
+						W = UP<br/>
+						A = LEFT<br/>
+						S = DOWN<br/>
+						D = RIGHT<br/>
+						SPACE = FIRE
+					</u>
+				</th>
+				<th rowspan="2">
+					<iframe name="video1" src="http://172.0.0.1:8090/?action=stream" width="640" height="480" frameborder="0" ></iframe>
+				</th>
+			</tr>
+			<tr>
+				<td style="background-color:#EEEEEE;width:320px;height:160px;text-align:top">
+					<object type="application/x-java-applet" height="160" width="320">
+						<param name="code" value ="ClientApplet.ClientApplet" />
+						<param name="archive" value ="USB_Web_Launcher_Client.jar"/>
+					</object>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

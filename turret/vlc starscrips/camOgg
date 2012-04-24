@@ -1,0 +1,1 @@
+cvlc v4l2:///dev/$1 --sout='#transcode{vcodec=theo,vb=800,scale=1,acodec=vorb,ab=128,channels=2,samplerate=44100}:http{mux=ogg,dst=:8084)/}' :no-sout-rtp-sap :no-sout-standard-sap :ttl=0 :sout-keep
