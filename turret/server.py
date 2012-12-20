@@ -13,23 +13,10 @@ import signal
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import urlparse
 from urlparse import parse_qs
-import missle_control
 
-'''
-class init():
 
-	global bleturret
-	bleturret = missle_control.missle_control()
-'''
-class talk():
-	def gitInput(self):
-		global bleturret
-		x=bleturret.letterinput
-		bleturret.letterinput="null"
-		return x
 
 class pyshoter(BaseHTTPRequestHandler):
-	bleturret = missle_control.missle_control()
 
 
 	"""
@@ -40,32 +27,17 @@ class pyshoter(BaseHTTPRequestHandler):
 
 	def log_message(self,  *args, **kwargs):
 		pass
-	
 
-	def server_status(self, params):
-		"""
-		Handle a request for the server status. Write out to the request
-		handler json data with active players and whether or not the game
-		has started.
-
-		@type  params: parsed URL query paramater dictionary
-		@param params: URL paramater string. No required fields for function
-				to operate.
-		"""
-
-		serverStatus = turret.server_status()
-		self.respond()
-		self.wfile.write(json.dumps(serverStatus))
 
 
 	def move_up(self, params):
 		"""
 		move up.
 		"""
-		succsess=bleturret.up()
-	
+		succsess=self.turret.up()
+
 		output = {"success":"up"}
-		
+
 		self.respond()
 		output = json.dumps(output)
 		self.wfile.write(output)
@@ -74,39 +46,39 @@ class pyshoter(BaseHTTPRequestHandler):
 		"""
 		move down.
 		"""
-		succsess=bleturret.down()
-	
+		succsess=self.turret.down()
+
 		output = {"success":"down"}
-		
+
 		self.respond()
 		output = json.dumps(output)
 		self.wfile.write(output)
 
-	
-	
+
+
 
 	def move_left(self, params):
 		"""
 		move left.
 		"""
-		succsess=bleturret.left()
-	
+		succsess=self.turret.left()
+
 		output = {"success":"left"}
-		
+
 		self.respond()
 		output = json.dumps(output)
 		self.wfile.write(output)
 
-	
-	
+
+
 	def move_right(self, params):
 		"""
 		move right.
 		"""
-		succsess=bleturret.right()
-	
+		succsess=self.turret.right()
+
 		output = {"success":"right"}
-		
+
 		self.respond()
 		output = json.dumps(output)
 		self.wfile.write(output)
@@ -115,10 +87,10 @@ class pyshoter(BaseHTTPRequestHandler):
 		"""
 		move stop.
 		"""
-		succsess=bleturret.stop()
-	
+		succsess=self.turret.stop()
+
 		output = {"success":"stop"}
-		
+
 		self.respond()
 		output = json.dumps(output)
 		self.wfile.write(output)
@@ -127,11 +99,11 @@ class pyshoter(BaseHTTPRequestHandler):
 		"""
 		move fire.
 		"""
-		succsess=bleturret.fire()
+		succsess=self.turret.fire()
 		time.sleep(1)
-	
+
 		output = {"success":"fire"}
-		
+
 		self.respond()
 		output = json.dumps(output)
 		self.wfile.write(output)
@@ -141,7 +113,7 @@ class pyshoter(BaseHTTPRequestHandler):
 		Display the webpage
 		"""
 		parsedURL = urlparse(self.path)
-		
+
 		xpath = parsedURL.path.replace("/","")
 		f = open(xpath)
 		if f:
@@ -155,7 +127,7 @@ class pyshoter(BaseHTTPRequestHandler):
 		Display the applit
 		"""
 		parsedURL = urlparse(self.path)
-		
+
 		xpath = parsedURL.path.replace("/","")
 		f = open(xpath)
 		if f:
@@ -170,7 +142,7 @@ class pyshoter(BaseHTTPRequestHandler):
 		Display the mobile webpage
 		"""
 		parsedURL = urlparse(self.path)
-		
+
 		xpath = parsedURL.path.replace("/","")
 		f = open(xpath)
 		if f:
@@ -193,16 +165,16 @@ class pyshoter(BaseHTTPRequestHandler):
 			'stop': move_stop,
 			'fire': move_fire,
 			'temp2': move_down,
-			
+
 		},
 	}
 
 	POST_PATHS = {
-		
+
 	}
 
 
-	
+
 	def explode_path(self, parsedURL):
 		"""
 		Seperate a URL path into subcomponents for each directory.
@@ -301,35 +273,4 @@ class pyshoter(BaseHTTPRequestHandler):
 
 
 	def do_POST(self):pass
-	
-
-def Main():
-	argsys = optparse.OptionParser(description="pyusbmissle")
-	argsys.add_option('-p', '--port', metavar='PORT', nargs=1, type='int',
-			default=7000, dest='port', help='Port to listen on')
-	argsys.add_option('--unit-tests', action='store_true',
-			help='Run unit tests', dest='unittest', default=False)
-	(opts, args) = argsys.parse_args()
-	if opts.unittest:
-		# Reset the arguments so that only filename is passed
-		sys.argv = sys.argv[:1]
-		unittest.main()
-
-	# Set up the turret
-	
-	port = opts.port
-
-
-	
-	
-	server = HTTPServer(('', port), pyshoter)
-
-	server.allow_reuse_address = True
-	server.serve_forever()
-
-if __name__ == '__main__':
-	Main()
-
-global bleturret
-bleturret = missle_control.missle_control()
 

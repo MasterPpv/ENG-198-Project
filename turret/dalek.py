@@ -13,7 +13,7 @@ import threading
 import thread
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-from server import pyshoter, talk
+import server as a
 
 
 import pygame
@@ -102,11 +102,33 @@ def getch():
 		fcntl.fcntl(fd, fcntl.F_SETFL, oldflags)
 	return c
 
+class control():
 
-def listen(self,talker):
+    def right(self) :
+        send_cmd(RIGHT)
+    def left(self) :
+        send_cmd(LEFT)
+    def up(self) :
+        send_cmd(UP)
+    def down(self) :
+        send_cmd(DOWN)
+    def stop(self) :
+        send_cmd(STOP)
+    def fire(self) :
+        send_cmd(FIRE)
+        play_sound(dalekGun)
+        time.sleep(5)
+	termios.tcflush(sys.stdin, termios.TCIOFLUSH)
+    def exit(self) :
+        print""
+	print "SHUT DOWN SEQUENCE INITIATED"
+        sys.exit(0)
+        
+
+def listen(server) :
 	
 	while 1:
-		x=talker.gitInput()
+		x=getch()
                 #try: 
 			
 			#x = raw_input('hi')
@@ -153,18 +175,20 @@ def listen(self,talker):
 		if x == 'k':
 			print""
 			print "SHUT DOWN SEQUENCE INITIATED"
-			break
-			
+                        server.shutdown()
+                        break
+
+class turretHandler (a.pyshoter)  :
+    turret = control()
 
 def Thread_listen(Thread,listen): pass
 def main(args):
 	#play_sound(exterminate)	
 	usage()
         setup_usb()
-	talker=talk();
-	server = HTTPServer(('', 7000), pyshoter)
+	server = HTTPServer(('', 7000), turretHandler)
 	#Thread_listen(threading.Thread(),listen)
-	thread.start_new_thread(listen, ("self",talker))	
+	thread.start_new_thread(listen,(server,))	
 	
 	
 	server.allow_reuse_address = True
